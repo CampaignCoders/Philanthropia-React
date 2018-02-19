@@ -4,7 +4,7 @@ import "./Navbar.css";
 const Navbar = props => (
     <div>
         <ul className="nav nav-pills nav-justified">
-            <li>Clicky Game</li>
+            <li>Philanthropa</li>
             <li
                 className={props.message.indexOf('incorrectly') !== -1 ? 
                     "desc-incorrect" : 
