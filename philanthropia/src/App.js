@@ -1,81 +1,33 @@
 import React, { Component } from 'react';
-import CampaignCard from "./components/CampaignCard";
-import campaigns from "./campaigns.json";
-import Wrapper from "./components/Wrapper";
-import Title from "./components/Title";
-import Navbar from "./components/Navbar";
+import { BrowserRouter as Router, Route} from 'react-router-dom';
+/*import Wrapper from "./components/Wrapper";*/
+/*import Navbar from "./components/Navbar";*/
+/*import Navbar from 'react-bootstrap/lib/Navbar';*/
+/*import Button from 'react-bootstrap/lib/Button';*/
 /*import logo from "./logo.svg"*/
 import './App.css';
+import Home from './pages/Home.jsx';
+import CampaignPage from './pages/CampaignPage.jsx';
+import Contact from './pages/Contact.jsx';
+import Footer from './components/Footer'
 
-let correctGuesses = 0;
-let topScore = 0;
-let message = "Go ahead! Start Clicking!";
 
-class App extends Component {
-	    
-  state = {
-      campaigns,
-      correctGuesses,
-      topScore,
-      message
-  };
-
-  pickcampaign = id => {
-
-      const campaigns = this.state.campaigns;
-
-      const clickedcampaign = campaigns.filter(campaign => campaign.id === id);
-
-      if (clickedcampaign[0].clicked){
-          correctGuesses = 0;
-          message = "you guessed incorrectly"
-
-          for (let i = 0 ; i < campaigns.length ; i++){
-              campaigns[i].clicked = false;
-          }
-          this.setState({message});
-          this.setState({ correctGuesses });
-          this.setState({campaigns});
-
-      } else {
-
-          clickedcampaign[0].clicked = true;
-          correctGuesses++;
-          message = "you guessed correctly";
-
-          if (correctGuesses > topScore){
-              topScore = correctGuesses;
-              this.setState({ topScore });
-          }
-          campaigns.sort(function(a, b){return 0.5 - Math.random()});
-          this.setState({ campaigns });
-          this.setState({correctGuesses});
-          this.setState({message});
-      }
-  };
+class App extends Component {	      
 
   render() {
     return (
-      <Wrapper>
-        <Navbar
-          message={this.state.message}
-          correctGuesses={this.state.correctGuesses}
-          topScore={this.state.topScore}
-        />
-        <Title/>
-        {this.state.campaigns.map(campaign => (
-          <CampaignCard
-            pickCampaign={this.pickCampaign}
-            id={campaign.id}
-            key={campaign.id}
-            name={campaign.name}
-            image={campaign.image}
-          />
-        ))}
-      </Wrapper>
-    );
+        <Router>
+          <div>
+            <Route exact path="/" component={Home}/>
+            <Route path="/CampaignPage" component={CampaignPage}/>
+            <Route path="/contact" component={Contact}/>
+            <Footer />
+          </div>
+        </Router>
+
+    )}
   }
-}
+
 
 /*
 class App extends Component {

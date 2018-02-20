@@ -1,4 +1,4 @@
-.navbar-default {
+.nav-pills {
     width: 100%;
     font-size: 3rem;
     color: #fff;
@@ -8,22 +8,22 @@
     font-family: ;
   }
   
-  .navbar-default a {
+  .nav-pills a {
     color: white;
   }
   
-  .navbar-default a:hover {
+  .nav-pills a:hover {
     color: #blue;
     text-decoration: none;
   }
   
-  .navbar-default li {
+  .nav-pills li {
     display: inline-block;
     padding: 26px 0;
     width: 25%;
     text-align: center;
   }
   
-  .navbar-default ul {
+  ul {
     padding-left: 0px;
   }
