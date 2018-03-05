@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 //import { LinkContainer } from 'react-router-bootstrap';
-import './Nav.css';
-//import logo from './images/philanthropa-transparent.png';
+import './Navbar.css';
 
 
-class Nav extends Component {
+class Navbar extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -22,6 +21,9 @@ class Nav extends Component {
                 <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
               </li>
               <li className="nav-item">
+                <Link className="nav-link" to="/Donate">Donate</Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link" to="/Login">Login</Link>
               </li>
               <li className="nav-item">
@@ -35,4 +37,4 @@ class Nav extends Component {
   }
 }
 
-export default Nav;
+export default Navbar;

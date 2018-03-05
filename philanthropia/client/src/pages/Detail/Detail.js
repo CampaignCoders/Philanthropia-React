@@ -21,11 +21,8 @@ class Detail extends Component {
       <Container fluid>
         <Row>
           <Col size="md-12">
-            <Jumbotron>
-              <h1>
-                {this.state.campaign.campaignName} with this Goal {this.state.campaign.campaignGoal} and this Expiration {this.state.campaign.campaignExpiration}
-              </h1>
-            </Jumbotron>
+            <Jumbotron title={this.state.campaign.campaignName}/>
+              <h2>Help us reach our fundraising goal of {this.state.campaign.campaignGoal} by this Expiration {this.state.campaign.campaignExpiration}</h2>
           </Col>
         </Row>
         <Row>
@@ -39,12 +36,12 @@ class Detail extends Component {
           </Col>
         </Row>
         <Row>
-          <Col size="md-2">
-            <Link to="/">← Back to Campaigns</Link>
+          <Col size="md-3">
+            <Link to="/">← Back to Campaign Lists</Link>
           </Col>
         </Row>
       </Container>
-    );
+  );
   }
 }
 

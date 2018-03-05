@@ -24,3 +24,5 @@ node_modules
 LICENSE.md
 server/node_modules
 .env
+node_modules
+LICENSE.md

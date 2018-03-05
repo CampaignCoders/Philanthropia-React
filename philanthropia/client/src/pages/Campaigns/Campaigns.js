@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import DeleteBtn from "../../components/DeleteBtn";
 import Jumbotron from "../../components/Jumbotron";
+import Footer from '../../components/Footer/Footer';
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../../components/Grid";
+import { Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
-import { Input, TextArea, FormBtn } from "../../components/Form";
+//import { Input, TextArea, FormBtn } from "../../components/Form";
+
+// Application Constants
+import AppConstants from "../../constants.js";
 
 class Campaigns extends Component {
   state = {
@@ -16,7 +19,7 @@ class Campaigns extends Component {
     campaignExpiration: "",
     campaignImage: ""
   };
-
+  
   componentDidMount() {
     this.loadCampaigns();
   }
@@ -42,91 +45,33 @@ class Campaigns extends Component {
     });
   };
 
-  handleFormSubmit = event => {
-    event.preventDefault();
-    if (this.state.campaignName && this.state.campaignGoal) {
-      API.saveCampaign({
-        campaignName: this.state.campaignName,
-        campaignPurpose: this.state.campaignPurpose,
-        campaignGoal: this.state.campaignGoal,
-        campaignExpiration: this.state.campaignExpiration,
-        campaignImage: this.state.campaignImage
-      })
-        .then(res => this.loadCampaigns())
-        .catch(err => console.log(err));
-    }
-  };
-
   render() {
     return (
-      <Container fluid>
-        <Row>
-          <Col size="md-6">
-            <Jumbotron>
-              <h1>Create a Campaign</h1>
-            </Jumbotron>
-            <form>
-              <Input
-                value={this.state.campaignName}
-                onChange={this.handleInputChange}
-                name="campaignName"
-                placeholder="Campaign Name (required)"
-              />
-              <TextArea
-                value={this.state.campaignPurpose}
-                onChange={this.handleInputChange}
-                name="campaignPurpose"
-                placeholder="Campaign Funding Purpose (required)"
-              />
-              <Input
-                value={this.state.campaignGoal}
-                onChange={this.handleInputChange}
-                name="campaignGoal"
-                placeholder="Campaign Funding Goal (required)"
-              />
-              <Input
-                value={this.state.campaignExpiration}
-                onChange={this.handleInputChange}
-                name="campaignExpiration"
-                placeholder="Expiration Date (required)"
-              />
-                <Input
-                value={this.state.campaignImage}
-                onChange={this.handleInputChange}
-                name="campaignImage"
-                placeholder="Attached an image (placeholder)"
-              />
-              <FormBtn
-                disabled={!(this.state.campaignGoal && this.state.campaignName)}
-                onClick={this.handleFormSubmit}
-              >
-                Submit Campaign
-              </FormBtn>
-            </form>
-          </Col>
-          <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>Campaigns On My List</h1>
-            </Jumbotron>
-            {this.state.campaigns.length ? (
-              <List>
-                {this.state.campaigns.map(campaign => (
-                  <ListItem key={campaign._id}>
-                    <Link to={"/campaigns/" + campaign._id}>
-                      <strong>
-                        {campaign.campaignName} by {campaign.campaignGoal}
-                      </strong>
-                    </Link>
-                    <DeleteBtn onClick={() => this.deleteCampaign(campaign._id)} />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3>No Results to Display</h3>
-            )}
-          </Col>
-        </Row>
-      </Container>
+      <div>
+        <div className='container'>
+          <Jumbotron title="Welcome" subtitle="Choose a campaign to donate"/>
+          <Container>
+            <h1>Choose a campaign by clicking on the Campaign Name</h1>
+                {this.state.campaigns.length ? (
+                  <List>
+                    {this.state.campaigns.map(campaign => (
+                      <ListItem key={campaign._id}>
+                        <Link to={"/campaigns/" + campaign._id}>
+                          <h1><strong>{campaign.campaignName}</strong></h1>
+                          </Link>
+                          <p>Campaign Goal: {campaign.campaignGoal}</p>
+                      </ListItem>
+                    ))}
+                  </List>
+                ) : (
+                  <h3>No Results to Display</h3>
+                )}
+              <p> </p>
+
+          </Container>
+        </div>
+        <Footer beneficiary={AppConstants.FOOTER_BENEFICIARY} organization={AppConstants.FOOTER_ORGANIZATION} organization_subheading={AppConstants.FOOTER_ORGANIZATION_SUBHEADING} />
+      </div>
     );
   }
 }
